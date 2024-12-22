@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Entry</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .outside{
+            background:linear-gradient(45deg,rgb(33, 32, 32),rgb(147, 147, 235));
+            color:white;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size:20px;
+            display:flex;
+            justify-content: center;
+            width:500px;
+        }
+        
+        .body{
+            display:flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Entry</h1>
+    <div class="outside">
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="{{ entry.name }}"><br><br>
+        <label for="mobile">Mobile:</label>
+        <input type="number" name="mobile" id="mobile" value="{{ entry.mobile }}"><br><br>
+        <label for="division">Division:</label>
+        <select name="division" id="division">
+            <option value="div -1" {% if entry.division == "div -1" %}selected{% endif %}>DIVISION -1</option>
+            <option value="div -2" {% if entry.division == "div -2" %}selected{% endif %}>DIVISION -2</option>
+            <option value="div -3" {% if entry.division == "div -3" %}selected{% endif %}>DIVISION -3</option>
+            <option value="div -4" {% if entry.division == "div -4" %}selected{% endif %}>DIVISION -4</option>
+        </select><br><br>
+        <fieldset>
+            <legend>First Time Voter:</legend>
+            Yes: <input type="radio" name="ft" value="yes" {% if entry.firstvote == "yes" %}checked{% endif %}>
+            No: <input type="radio" name="ft" value="no" {% if entry.firstvote == "no" %}checked{% endif %}>
+        </fieldset><br>
+        <button type="submit">Update</button>
+    </form>
+    </div>
+</body>
+</html>

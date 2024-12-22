@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>personal info</title>  
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+    <style>
+        .outside{
+            background:linear-gradient(45deg,rgb(33, 32, 32),rgb(147, 147, 235));
+            color:white;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size:20px;
+            display:flex;
+            justify-content: center;
+            width:500px;
+        }
+        .fd{
+            width:200px;
+        }
+        .body{
+            display:flex;
+            justify-content: center;
+        }
+        
+    </style>
+</head>
+<body class="body">
+    {% if res %}
+        <h1>Your response has been recorded</h1>
+        <form action="{% url 'showlist' %}">
+        {% csrf_token %}
+        <button type="submit">Check Entries</button>
+        </form>
+        
+    {% else %}
+    <div class="outside">
+        <form method="POST" action="{% url 'getting' %}" class="form">
+            {% csrf_token %}
+            <h1>Welcome User</h1>
+            ID :<input type="number" placeholder="enter 3 digit id code" name="id"><br><br>
+            Name : <input type="text" name="name"><br><br>
+            Age  : <input type="number" name="age"><br><br>
+            Email : <input type="email" name="email"><br><br>
+            Mobile : <input type="number" name="mobile"><br><br>
+            Date Of Birth : <input type="date" name="date_of_birth"><br><br>
+            <fieldset class="fd">
+                <legend>Gender</legend>
+                Male: <input type="radio" name="gender" id="male" value="male">
+                Female : <input type="radio" name="gender" id="female" value="
+                female">
+            </fieldset>
+            <h3>Select Your Division</h3>
+            <select name="division">
+                <option value="div -1">DIVISION -1</option>
+                <option value="div -2">DIVISION -2</option>
+                <option value="div -3">DIVISION -3</option>
+                <option value="div -4">DIVISION -4</option>
+            </select><br><br>
+            <fieldset class="fd">
+                <legend>Firts Time voter</legend>
+                Yes:<input type="radio" name="ft" value="yes">
+                No :<input type="radio" name="ft" value="no">
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>
